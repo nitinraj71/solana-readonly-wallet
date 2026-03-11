@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { deriveWallet } from "../utils/wallet";
+import { getBalance, getTokenBalances } from "../utils/solana";
 
 export default function WalletList({ mnemonic }) {
 
@@ -12,7 +13,20 @@ export default function WalletList({ mnemonic }) {
       wallets.length
     );
 
-    setWallets([...wallets, keypair]);
+    const balance = await getBalance(keypair.publicKey);
+
+    const tokens = await getTokenBalances(
+      keypair.publicKey
+    );
+
+    setWallets([
+      ...wallets,
+      {
+        keypair,
+        balance,
+        tokens
+      }
+    ]);
   }
 
   return (
@@ -30,8 +44,22 @@ export default function WalletList({ mnemonic }) {
           <h3>Wallet {index + 1}</h3>
 
           <p>
-            Address: {wallet.publicKey.toBase58()}
+            Address: {wallet.keypair.publicKey.toBase58()}
           </p>
+
+          <p>
+            SOL: {wallet.balance}
+          </p>
+
+          <h4>Tokens</h4>
+
+          {wallet.tokens.map((token, i) => (
+
+            <p key={i}>
+              {token.mint} : {token.balance}
+            </p>
+
+          ))}
 
         </div>
 
