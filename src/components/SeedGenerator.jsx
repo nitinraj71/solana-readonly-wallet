@@ -1,48 +1,68 @@
 import { generateMnemonic } from "bip39";
 import { useState } from "react";
 
-export default function SeedGenerator({ setMnemonic }) {
+export default function SeedGenerator({setMnemonic}){
 
-  const [seed, setSeed] = useState("");
-  const [showSeed, setShowSeed] = useState(false);
+  const [generatedSeed,setGeneratedSeed] = useState("")
+  const [showSeed,setShowSeed] = useState(false)
+  const [inputSeed,setInputSeed] = useState("")
 
-  function generateSeedPhrase() {
+  function generateSeed(){
 
-    const mnemonic = generateMnemonic();
+    const mnemonic = generateMnemonic()
 
-    setSeed(mnemonic);
-    setMnemonic(mnemonic);
+    setGeneratedSeed(mnemonic)
+    setMnemonic(mnemonic)
   }
 
-  return (
+  function importSeed(){
+
+    if(!inputSeed) return
+
+    setMnemonic(inputSeed.trim())
+  }
+
+  return(
 
     <div className="seed-card">
 
-      <h2>Seed Phrase Generator</h2>
+      <h2>Create Wallet</h2>
 
-      <button onClick={generateSeedPhrase}>
+      <button onClick={generateSeed}>
         Generate Seed Phrase
       </button>
 
-      {seed && (
+      {generatedSeed && (
 
-        <div className="seed-box">
+        <div>
 
-          <button
-            onClick={() => setShowSeed(!showSeed)}
-          >
-            {showSeed ? "Hide Seed Phrase" : "Reveal Seed Phrase"}
+          <button onClick={()=>setShowSeed(!showSeed)}>
+            {showSeed ? "Hide Seed" : "Reveal Seed"}
           </button>
 
           {showSeed && (
-            <p>{seed}</p>
+            <p>{generatedSeed}</p>
           )}
 
         </div>
 
       )}
 
+      <hr style={{margin:"20px 0"}}/>
+
+      <h2>Import Wallet</h2>
+
+      <textarea
+        placeholder="Paste your 12 word seed phrase"
+        onChange={(e)=>setInputSeed(e.target.value)}
+      />
+
+      <button onClick={importSeed}>
+        Import Wallet
+      </button>
+
     </div>
 
-  );
+  )
+
 }

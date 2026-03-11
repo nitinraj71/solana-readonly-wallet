@@ -2,31 +2,32 @@ import { useState } from "react";
 import SeedGenerator from "./components/SeedGenerator";
 import WalletList from "./components/WalletList";
 
-function App() {
+function App(){
 
-  const [mnemonic, setMnemonic] = useState("");
+  const [mnemonic,setMnemonic] = useState("");
 
-  return (
+  return(
 
-    <div className="app">
+    <div>
 
-      <header className="header">
-        <h1>Solana Wallet Dashboard</h1>
-      </header>
+      <div className="header">
+        <h1>Solana Wallet Viewer</h1>
+      </div>
 
-      <main className="container">
+      <div className="container">
 
-        <SeedGenerator setMnemonic={setMnemonic} />
+        <SeedGenerator setMnemonic={setMnemonic}/>
 
         {mnemonic && (
-          <WalletList mnemonic={mnemonic} />
+          <WalletList mnemonic={mnemonic}/>
         )}
 
-      </main>
+      </div>
 
     </div>
 
-  );
+  )
+
 }
 
-export default App;
+export default App

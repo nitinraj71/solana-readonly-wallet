@@ -1,60 +1,93 @@
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
-  font-family:Inter, sans-serif;
-  background:#0d0d0f;
+  font-family:Inter, system-ui, sans-serif;
+  background:#0e0e11;
   color:white;
 }
 
+/* HEADER */
+
 .header{
-  background:#111;
   padding:20px;
   text-align:center;
-  border-bottom:1px solid #222;
+  border-bottom:1px solid #1f1f24;
+  background:#111115;
 }
+
+.header h1{
+  margin:0;
+  font-size:24px;
+}
+
+/* MAIN CONTAINER */
 
 .container{
   max-width:1000px;
   margin:auto;
-  padding:30px;
+  padding:40px 20px;
 }
+
+/* SEED CARD */
 
 .seed-card{
-  background:#1a1a1f;
-  padding:20px;
-  border-radius:12px;
+  background:#151519;
+  padding:25px;
+  border-radius:14px;
+  border:1px solid #26262d;
   margin-bottom:30px;
-  border:1px solid #2a2a2f;
 }
 
-.seed-box{
+.seed-card h2{
+  margin-top:0;
+}
+
+textarea{
+  width:100%;
+  padding:12px;
   margin-top:10px;
+  border-radius:10px;
+  border:1px solid #333;
+  background:#0f0f13;
+  color:white;
 }
 
-.wallet-section{
-  margin-top:20px;
-}
+/* BUTTONS */
 
-.add-wallet{
+button{
   background:#6366f1;
-  padding:10px 18px;
   border:none;
+  padding:10px 16px;
   border-radius:8px;
   color:white;
   cursor:pointer;
+  margin-top:10px;
+  margin-right:10px;
+  font-weight:500;
 }
+
+button:hover{
+  background:#4f46e5;
+}
+
+/* WALLET GRID */
 
 .wallet-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:20px;
-  margin-top:20px;
 }
 
+/* WALLET CARD */
+
 .wallet-card{
-  background:#1a1a1f;
+  background:#151519;
   padding:20px;
-  border-radius:12px;
-  border:1px solid #2a2a2f;
+  border-radius:14px;
+  border:1px solid #26262d;
 }
 
 .wallet-header{
@@ -65,28 +98,32 @@ body{
 
 .wallet-address{
   font-size:13px;
-  color:#aaa;
+  color:#a1a1aa;
   word-break:break-all;
+  margin-top:6px;
 }
 
-.balance{
+.wallet-balance{
   margin-top:10px;
   font-weight:600;
 }
 
 .tokens{
-  margin-top:10px;
+  margin-top:12px;
 }
 
-button{
-  background:#6366f1;
-  border:none;
-  padding:6px 12px;
-  border-radius:6px;
-  color:white;
-  cursor:pointer;
+.tokens h4{
+  margin-bottom:6px;
 }
 
-button:hover{
-  background:#4f46e5;
+/* LINKS */
+
+a{
+  color:#818cf8;
+  text-decoration:none;
+  font-size:13px;
+}
+
+a:hover{
+  text-decoration:underline;
 }
