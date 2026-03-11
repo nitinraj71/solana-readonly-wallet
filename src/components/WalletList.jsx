@@ -6,6 +6,10 @@ export default function WalletList({ mnemonic }) {
 
   const [wallets, setWallets] = useState([]);
 
+  function copyAddress(address) {
+    navigator.clipboard.writeText(address);
+  }
+
   async function addWallet() {
 
     const keypair = await deriveWallet(
@@ -13,7 +17,9 @@ export default function WalletList({ mnemonic }) {
       wallets.length
     );
 
-    const balance = await getBalance(keypair.publicKey);
+    const balance = await getBalance(
+      keypair.publicKey
+    );
 
     const tokens = await getTokenBalances(
       keypair.publicKey
@@ -37,33 +43,65 @@ export default function WalletList({ mnemonic }) {
         Add Wallet
       </button>
 
-      {wallets.map((wallet, index) => (
+      {wallets.map((wallet, index) => {
 
-        <div key={index}>
+        const address =
+          wallet.keypair.publicKey.toBase58();
 
-          <h3>Wallet {index + 1}</h3>
+        return (
 
-          <p>
-            Address: {wallet.keypair.publicKey.toBase58()}
-          </p>
+          <div key={index} className="wallet-card">
 
-          <p>
-            SOL: {wallet.balance}
-          </p>
+            <div className="wallet-header">
 
-          <h4>Tokens</h4>
+              <h3>
+                Wallet {index + 1}
+              </h3>
 
-          {wallet.tokens.map((token, i) => (
+              <button
+                onClick={() => copyAddress(address)}
+              >
+                Copy Address
+              </button>
 
-            <p key={i}>
-              {token.mint} : {token.balance}
+            </div>
+
+            <p className="address">
+              {address}
             </p>
 
-          ))}
+            <a
+              href={`https://explorer.solana.com/address/${address}?cluster=devnet`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View on Explorer
+            </a>
 
-        </div>
+            <p>
+              SOL Balance: {wallet.balance}
+            </p>
 
-      ))}
+            <h4>Tokens</h4>
+
+            {wallet.tokens.length === 0 ? (
+              <p>No tokens found</p>
+            ) : (
+              wallet.tokens.map((token, i) => (
+
+                <p key={i}>
+                  {token.mint.slice(0, 6)}...
+                  : {token.balance}
+                </p>
+
+              ))
+            )}
+
+          </div>
+
+        )
+
+      })}
 
     </div>
 

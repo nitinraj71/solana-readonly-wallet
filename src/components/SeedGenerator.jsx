@@ -4,12 +4,11 @@ import { useState } from "react";
 export default function SeedGenerator({ setMnemonic }) {
 
   const [seed, setSeed] = useState("");
+  const [showSeed, setShowSeed] = useState(false);
 
   function generateSeedPhrase() {
 
     const mnemonic = generateMnemonic();
-
-    console.log("Generated Seed:", mnemonic);
 
     setSeed(mnemonic);
     setMnemonic(mnemonic);
@@ -17,13 +16,21 @@ export default function SeedGenerator({ setMnemonic }) {
 
   return (
 
-    <div>
+    <div className="wallet-card">
 
       <button onClick={generateSeedPhrase}>
         Generate Seed Phrase
       </button>
 
-      <p>{seed}</p>
+      <button
+        onClick={() => setShowSeed(!showSeed)}
+      >
+        {showSeed ? "Hide Seed Phrase" : "Show Seed Phrase"}
+      </button>
+
+      {showSeed && (
+        <p className="seed">{seed}</p>
+      )}
 
     </div>
 
