@@ -38,7 +38,7 @@ Blockchain
 
 Deployed on Vercel
 
-https://your-vercel-link
+[https://your-vercel-link](https://solana-readonly-wallet.vercel.app/)
 
 ---
 
