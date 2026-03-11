@@ -35,10 +35,7 @@ Blockchain
 ---
 
 ## Live Demo
-
-Deployed on Vercel
-
-[https://your-vercel-link](https://solana-readonly-wallet.vercel.app/)
+(https://solana-readonly-wallet.vercel.app/)
 
 ---
 
