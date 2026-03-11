@@ -37,71 +37,80 @@ export default function WalletList({ mnemonic }) {
 
   return (
 
-    <div>
+    <div className="wallet-section">
 
-      <button onClick={addWallet}>
+      <button className="add-wallet" onClick={addWallet}>
         Add Wallet
       </button>
 
-      {wallets.map((wallet, index) => {
+      <div className="wallet-grid">
 
-        const address =
-          wallet.keypair.publicKey.toBase58();
+        {wallets.map((wallet, index) => {
 
-        return (
+          const address =
+            wallet.keypair.publicKey.toBase58();
 
-          <div key={index} className="wallet-card">
+          return (
 
-            <div className="wallet-header">
+            <div
+              key={index}
+              className="wallet-card"
+            >
 
-              <h3>
-                Wallet {index + 1}
-              </h3>
+              <div className="wallet-header">
 
-              <button
-                onClick={() => copyAddress(address)}
+                <h3>Wallet {index + 1}</h3>
+
+                <button
+                  onClick={() => copyAddress(address)}
+                >
+                  Copy
+                </button>
+
+              </div>
+
+              <p className="wallet-address">
+                {address}
+              </p>
+
+              <a
+                href={`https://explorer.solana.com/address/${address}?cluster=devnet`}
+                target="_blank"
+                rel="noreferrer"
               >
-                Copy Address
-              </button>
+                View on Explorer
+              </a>
+
+              <div className="balance">
+                SOL Balance: {wallet.balance}
+              </div>
+
+              <div className="tokens">
+
+                <h4>Tokens</h4>
+
+                {wallet.tokens.length === 0 ? (
+                  <p>No tokens</p>
+                ) : (
+                  wallet.tokens.map((token, i) => (
+
+                    <p key={i}>
+                      {token.mint.slice(0,6)}...
+                      : {token.balance}
+                    </p>
+
+                  ))
+                )}
+
+              </div>
 
             </div>
 
-            <p className="address">
-              {address}
-            </p>
+          );
 
-            <a
-              href={`https://explorer.solana.com/address/${address}?cluster=devnet`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              View on Explorer
-            </a>
+        })}
 
-            <p>
-              SOL Balance: {wallet.balance}
-            </p>
-
-            <h4>Tokens</h4>
-
-            {wallet.tokens.length === 0 ? (
-              <p>No tokens found</p>
-            ) : (
-              wallet.tokens.map((token, i) => (
-
-                <p key={i}>
-                  {token.mint.slice(0, 6)}...
-                  : {token.balance}
-                </p>
-
-              ))
-            )}
-
-          </div>
-
-        )
-
-      })}
+      </div>
 
     </div>
 

@@ -8,15 +8,21 @@ function App() {
 
   return (
 
-    <div className="container">
+    <div className="app">
 
-      <h1>Solana Read Only Wallet</h1>
+      <header className="header">
+        <h1>Solana Wallet Dashboard</h1>
+      </header>
 
-      <SeedGenerator setMnemonic={setMnemonic} />
+      <main className="container">
 
-      {mnemonic && (
-        <WalletList mnemonic={mnemonic} />
-      )}
+        <SeedGenerator setMnemonic={setMnemonic} />
+
+        {mnemonic && (
+          <WalletList mnemonic={mnemonic} />
+        )}
+
+      </main>
 
     </div>
 

@@ -16,20 +16,30 @@ export default function SeedGenerator({ setMnemonic }) {
 
   return (
 
-    <div className="wallet-card">
+    <div className="seed-card">
+
+      <h2>Seed Phrase Generator</h2>
 
       <button onClick={generateSeedPhrase}>
         Generate Seed Phrase
       </button>
 
-      <button
-        onClick={() => setShowSeed(!showSeed)}
-      >
-        {showSeed ? "Hide Seed Phrase" : "Show Seed Phrase"}
-      </button>
+      {seed && (
 
-      {showSeed && (
-        <p className="seed">{seed}</p>
+        <div className="seed-box">
+
+          <button
+            onClick={() => setShowSeed(!showSeed)}
+          >
+            {showSeed ? "Hide Seed Phrase" : "Reveal Seed Phrase"}
+          </button>
+
+          {showSeed && (
+            <p>{seed}</p>
+          )}
+
+        </div>
+
       )}
 
     </div>
